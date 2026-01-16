@@ -10,11 +10,30 @@ const btn_Depositar = document.getElementById("btn-depositar");
 const btn_Transferir = document.getElementById("btn-transferir");
 const btn_Historial = document.getElementById("btn-historial");
 const btn_Menu = document.getElementById("btn-menu");
-const texto_carga = document.getElementById("texto-carga");
-const modalCarga = new bootstrap.Modal(document.getElementById("modalCarga"));
+
+let alertContainerMenu = "alert-container-menu";
 
 //================================================
 // creacion de funciones
+// ========================================
+// FUNCIONES ALERTAS
+function mostrarAlerta(containerId, mensaje, tipo) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = `
+        <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+            ${mensaje}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `;
+}
+// FUNCION PARA RESETEAR ALERTAS
+function limpiarAlertas(containerId) {
+    const container = document.getElementById(containerId);
+    if (container) {
+        container.innerHTML = '';
+    }
+}
+
 // se usa el if como protccion de errores y buena practica
 function actualizarSaldo() {
     if (saldo_actual) {
@@ -29,6 +48,8 @@ function mostrarUsuario() {
     }
 }
 
+
+
 //================================================
 // Llamada a funciones
 actualizarSaldo();
@@ -38,23 +59,31 @@ mostrarUsuario();
 // botones
 if (btn_Depositar) {
     btn_Depositar.addEventListener("click", () => {
-        textoCarga.textContent = 'Cargando "Depósito"';
-        modalCarga.show();
+        limpiarAlertas(alertContainerMenu);
+        mostrarAlerta(alertContainerMenu, "Redirigiendo a Depósitos...", "info");
         setTimeout(() => {
-      window.location.href = "deposit.html";
-    }, 1000);
+            window.location.href = "deposit.html";
+        }, 1500);
     });
 }
 
 if (btn_Transferir) {
     btn_Transferir.addEventListener("click", () => {
-        window.location.href = "sendmoney.html";
+        limpiarAlertas(alertContainerMenu);
+        mostrarAlerta(alertContainerMenu, "Redirigiendo a Transferencias...", "info");
+        setTimeout(() => {
+            window.location.href = "sendmoney.html";
+        }, 1000);
     });
 }
 
 if (btn_Historial) {
     btn_Historial.addEventListener("click", () => {
-        window.location.href = "transactions.html";
+        limpiarAlertas(alertContainerMenu);
+        mostrarAlerta(alertContainerMenu, "Abriendo Historial...", "info");
+        setTimeout(() => {
+            window.location.href = "transactions.html";
+        }, 1000);
     });
 }
 

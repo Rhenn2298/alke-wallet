@@ -2,26 +2,7 @@
 // Credenciales válidas
 const USUARIO_VALIDO = "stevenstone@alke.com";
 const CONTRASENA_VALIDA = "qwerty";
-// ========================================
-// FUNCIONES ALERTAS
-// ========================================
-// FUNCION PARA MOSTRAR ALERTAS
-function mostrarAlerta(containerId, mensaje, tipo) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = `
-        <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
-            ${mensaje}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    `;
-}
-// FUNCION PARA RESETEAR ALERTAS
-function limpiarAlertas(containerId) {
-    const container = document.getElementById(containerId);
-    if (container) {
-        container.innerHTML = '';
-    }
-}
+
 // ========================================
 // LÓGICA INDEX
 // ========================================
