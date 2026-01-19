@@ -38,9 +38,10 @@ function actualizarHistorial(filtro) {
         const movimientos = JSON.parse(localStorage.getItem('transacciones'))
         if(!filtro || mov.tipo === filtro){
             tbody.append(`
-                <tr>
+                <tr class="${mov.tipo === 'deposito' ? 'fila-deposito' : 'fila-transferencia'}">
                     <td>${mov.nombre}</td>
                     <td>${mov.monto}</td>
+                    <td>${mov.tipo}</td>
                 </tr>
                         `);
         }

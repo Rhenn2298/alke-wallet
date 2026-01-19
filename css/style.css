@@ -1,0 +1,118 @@
+/* css/styles.css - Básico pero efectivo */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Inter&display=swap');
+
+/* Paleta de colores fintech */
+:root {
+
+}
+
+/* Fuentes Texto - Saldo */
+body {
+    background-image: url('../img/fondo.png');
+    background-position: center;
+    background-size: cover;
+    font-family: 'Inter', sans-serif;
+}
+#saldo-actual, #modal-saldo-actual { 
+    font-family: 'Roboto Mono', monospace;
+}
+
+/*Index*/
+h1.display-4 {
+  color: #ffffff;
+}
+h1.display-4 small {
+  color: #8b8ba5;
+}
+.titulo-inicio{
+    background-color: #5e640344;
+    border-color: #949e0b;
+    border-radius: 50px;
+}
+
+/* Botones Targetas */
+.btn-primary {
+  background-color: #5539d4; 
+  border-color: #949e0b;
+}
+.btn-primary:hover {
+  background-color: #e2cf1eb7;
+  border-color: #949e0b;
+}
+.btn-secondary {
+  background-color: #e2cf1eb7; 
+  border-color: #949e0b;
+}
+.btn-secondary:hover {
+  background-color: #b7a1df6b;
+  border-color: #000000d7;
+}
+#btn-nuevo-contacto {
+  background-color: #5539d4;           
+  border-color: #e2cf1eb7; 
+  color: #ffffff;    
+}
+#btn-nuevo-contacto:hover {
+  background-color: #b7a1df6b;
+  color: #ffffff; 
+}
+#btn-enviar-dinero:disabled {
+  background:#6a1b9a;
+  color: #ccc;
+  border-color: #6a1b9a; 
+  cursor: not-allowed;
+}
+#btn-enviar-dinero:enabled {
+  background:#5539d4;
+  color: #ffffff; 
+  border-color: #e2cf1eb7; 
+}
+#btn-enviar-dinero:enabled:hover {
+  background:#b7a1df6b;
+  color: #ffffff; 
+  border-color: #e2cf1eb7; 
+}
+
+/* Tarjeta central */
+.card.shadow-lg{
+  background: linear-gradient(340deg, #8609b8, #0889c4);
+  border-radius: 20px;
+  border: 2px solid #e2cf1eb7; 
+  color: #ffffff;              
+}
+
+/* seccion saldo */
+.card-saldo {
+  background-color: #f1f1d5;
+  border-radius: 10px;
+  border: 2px solid #e2cf1eb7;
+}
+
+/* tabla contactos*/
+.tabla-contenedor {
+    border-radius: 8px;
+    overflow: hidden;
+}
+.tabla-encabezado thead th {
+  background-color: #8220be; 
+  color: #ffffff;
+  border-color: #000000;
+}
+
+/* tabla historial*/
+.fila-deposito td {
+    background-color: #faed76;
+    color: #000000;
+}
+.fila-transferencia td{
+    background-color: #9958ce;
+    color: #000000;
+}
+
+/* ventanas emergentes */
+#modalNuevoContacto .modal-content {
+    background-color: #e2cf1eb7;
+}
+#modalEnviarDinero .modal-content {
+    background-color: #0889c4;
+}

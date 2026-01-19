@@ -1,6 +1,6 @@
 //================================================
 // inicializacion de variable
-let saldo = parseFloat(localStorage.getItem("saldo")) || 10;
+let saldo = parseFloat(localStorage.getItem("saldo")) || 0;
 const usuario = localStorage.getItem("usuarioEmail") || "sin inicio de sesion";
 // variables de elementos
 const saldo_actual = document.getElementById("saldo-actual");
