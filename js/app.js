@@ -1,1 +1,0 @@
-//logica principal referente a vistas de movimientos financieros

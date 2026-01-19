@@ -1,5 +1,167 @@
-<!-- SendMoney: Pantalla para enviar dinero a otros contactos
-     - Formulario de transferencia y agregar contacto
-     - Lista de contactos 
-     - jQuery obligatorio para autocompletar búsqueda de contactos
--->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enviar Dinero - Billetera Electrónica</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .fila-seleccionada {
+      background-color: #0d6efd;
+      color: white;
+      cursor: pointer;
+    }
+    tbody tr:hover {
+      background-color: #e9ecef;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg" style="width: 100%; max-width: 700px;">
+      <div class="card-body p-4">
+        <h2 class="card-title text-center mb-4">Enviar Dinero</h2>
+
+        <!-- Contenedor de alertas -->
+        <div id="alert-container-sendmoney"></div>
+
+        <div class="row">
+          <!-- Columna izquierda: Lista de contactos -->
+          <div class="col-12 col-md-8 mb-3 mb-md-0">
+            <!-- Buscador -->
+            <div class="mb-3">
+              <label for="busqueda" class="form-label">Buscar contacto:</label>
+              <input type="text" id="busqueda" class="form-control" placeholder="Busca por nombre">
+            </div>
+
+            <!-- Tabla de contactos -->
+            <div style="max-height: 250px; overflow-y: auto;">
+              <table class="table table-sm table-bordered table-hover">
+                <thead class="table-dark sticky-top">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Alias</th>
+                    <th>CBU</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-body">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Columna derecha: Botones y saldo -->
+          <div class="col-12 col-md-4 d-flex flex-column">
+            <div class="card mb-3">
+              <div class="card-body text-center">
+                <h6 class="card-subtitle mb-2 text-muted">Saldo disponible</h6>
+                <h4 class="card-title mb-0" id="saldo-actual"></h4>
+                <small class="text-muted">Contacto seleccionado:</small>
+                <p  id="contacto-seleccionado-nombre" 
+                    class="fw-bold mb-0"
+                    >Seleccione contacto
+                </p>
+              </div>
+            </div>
+
+            <!-- Botones -->
+            <button id="btn-nuevo-contacto" 
+                    class="btn btn-outline-primary mb-2 w-100"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modalNuevoContacto"
+                    >Nuevo Contacto
+            </button>
+            <button id="btn-enviar-dinero" 
+                    class="btn btn-primary mb-2 w-100" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#modalEnviarDinero"
+                    disabled
+                    >Enviar Dinero
+            </button>
+            <button id="btn-menu" 
+                    class="btn btn-secondary w-100"
+                    >Volver
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Nuevo Contacto -->
+  <div class="modal fade" id="modalNuevoContacto" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar Nuevo Contacto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="nuevo-nombre" class="form-label">Nombre:</label>
+            <input type="text" id="nuevo-nombre" class="form-control" placeholder="Ej: Juan Pérez">
+          </div>
+          <div class="mb-3">
+            <label for="nuevo-alias" class="form-label">Alias:</label>
+            <input type="text" id="nuevo-alias" class="form-control" placeholder="Ej: juanpe">
+          </div>
+          <div class="mb-3">
+            <label for="nuevo-cbu" class="form-label">CBU:</label>
+            <input type="number" id="nuevo-cbu" class="form-control" placeholder="Ej: 1234567890">
+          </div>
+          <div id="alert-container-contacto"></div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-guardar-contacto" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Enviar Dinero -->
+  <div class="modal fade" id="modalEnviarDinero" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar Envío</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-6">
+              <label class="form-label">Destinatario:</label>
+              <p id="contacto-seleccionado-enviar" class="fw-bold mb-0"></p>
+            </div>
+            <div class="col-6 d-flex justify-content-center">
+              <div class="card text-center" style="width: 100%; max-width: 150px;">
+                <div class="card-body p-2">
+                  <h6 class="card-subtitle mb-1 text-muted">Saldo disponible:</h6>
+                  <h5 id="modal-saldo-actual" class="card-title mb-0">$uwu</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="monto-confirmar" class="form-label">Monto a enviar:</label>
+            <input type="number" id="monto-confirmar" class="form-control" placeholder="Ingresa el monto">
+          </div>
+          <div id="alert-container-envio"></div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-confirmar-envio" class="btn btn-primary">Confirmar Envío</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
+  <script src="../js/navegacion.js"></script>
+  <script src="../js/transacciones.js"></script>
+</body>
+</html>
