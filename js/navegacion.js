@@ -34,7 +34,7 @@ function limpiarAlertas(containerId) {
     }
 }
 
-// se usa el if como protccion de errores y buena practica
+// ****se usa el if como protccion de errores y buena practica
 function actualizarSaldo() {
     if (saldo_actual) {
         saldo_actual.innerHTML = "$" + saldo;
@@ -47,9 +47,6 @@ function mostrarUsuario() {
         usuario_email.innerHTML = usuario;
     }
 }
-
-
-
 //================================================
 // Llamada a funciones
 actualizarSaldo();

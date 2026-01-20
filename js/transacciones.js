@@ -14,6 +14,7 @@ let contactoSeleccionado = null;
 
 //================================================
 // declaracion de funciones
+
 // actualizacion de contactos
 function actualizarContactos(lista) {
     const tbody = $('#tabla-body');
@@ -57,6 +58,7 @@ actualizarHistorial();
 
 //================================================
 // acciones botones
+
 // Funcionalidad de deposito
 if (btn_depositar_dinero) {
     btn_depositar_dinero.addEventListener('click', () => {
@@ -200,5 +202,4 @@ $('#busqueda').on('keyup', function() {
             </tr>`
         );
     }
-
 });

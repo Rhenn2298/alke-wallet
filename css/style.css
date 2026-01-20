@@ -1,7 +1,5 @@
-/* css/styles.css - Básico pero efectivo */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Inter&display=swap');
 
-/* Paleta de colores fintech */
 :root {
 
 }
@@ -30,7 +28,7 @@ h1.display-4 small {
     border-radius: 50px;
 }
 
-/* Botones Targetas */
+/* Botones */
 .btn-primary {
   background-color: #5539d4; 
   border-color: #949e0b;

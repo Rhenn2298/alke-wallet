@@ -1,77 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Historial de Transacciones - Billetera Electrónica</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/style.css">
-</head>
-
-<body>
-  <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card shadow-lg" style="width: 100%; max-width: 700px;">
-      <div class="card-body p-4">
-        <h2 class="card-title text-center mb-4">Historial de Transacciones</h2>
-
-        <!-- Contenedor de alertas -->
-        <div id="alert-container-transactions"></div>
-
-        <div class="row">
-          <!-- Columna Lista de transacciones -->
-          <div class="col-12 col-md-8 mb-3 mb-md-0">
-            <!-- Filtro de tipo de movimiento -->
-            <div class=" mb-3">
-              <label for="tipo-movimiento" class="form-label">Filtrar por tipo:</label>
-              <select id="tipo-movimiento" class="form-select">
-                <option value="">Todos</option>
-                <option value="deposito">Depósitos</option>
-                <option value="transferencia">Transferencias</option>
-              </select>
-            </div>
-
-            <!-- historial transacciones -->
-            <div  class="tabla-contenedor" style="max-height: 350px; overflow-y: auto;">
-              <table class="table table-sm tabla-encabezado table-bordered">
-                <thead class="table-dark sticky-top">
-                  <tr>
-                    <th>Destinatario/Origen</th>
-                    <th>Monto</th>
-                    <th>tipo</th>
-                  </tr>
-                </thead>
-                <tbody class="table-dark" id="lista-transacciones">
-                </tbody>
-              </table>
-            </div>
-
-            <!-- sin transacciones -->
-            <div id="mensaje-sin-transacciones" class="text-center text-muted mt-3" style="display: none;">
-              <p>No hay transacciones registradas</p>
-            </div>
-          </div>
-
-          <!-- Columna Saldo y botón volver -->
-          <div class="col-12 col-md-4 mt-4 d-flex flex-column">
-            <!-- Saldo actual -->
-            <div class="card card-saldo mb-3">
-              <div class="card-body text-center">
-                <h6 class="card-subtitle mb-2 text-muted">Saldo actual</h6>
-                <h4 class="card-title mb-0" id="saldo-actual"></h4>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Transacciones - Billetera Electrónica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+      <div class="card shadow-lg" style="width: 100%; max-width: 700px;">
+        <div class="card-body p-4">
+          <h2 class="card-title text-center mb-4">Historial de Transacciones</h2>
+          <!-- Contenedor de alertas -->
+          <div id="alert-container-transactions"></div>
+          <div class="row">
+            <!-- Columna Lista de transacciones -->
+            <div class="col-12 col-md-8 mb-3 mb-md-0">
+              <!-- Filtro de tipo de movimiento -->
+              <div class=" mb-3">
+                <label for="tipo-movimiento" class="form-label">Filtrar por tipo:</label>
+                <select id="tipo-movimiento" class="form-select">
+                  <option value="">Todos</option>
+                  <option value="deposito">Depósitos</option>
+                  <option value="transferencia">Transferencias</option>
+                </select>
+              </div>
+              <!-- historial transacciones -->
+              <div  class="tabla-contenedor" style="max-height: 350px; overflow-y: auto;">
+                <table class="table table-sm tabla-encabezado table-bordered">
+                  <thead class="table-dark sticky-top">
+                    <tr>
+                      <th>Destinatario/Origen</th>
+                      <th>Monto</th>
+                      <th>tipo</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-dark" id="lista-transacciones">
+                  </tbody>
+                </table>
+              </div>
+              <!-- sin transacciones -->
+              <div id="mensaje-sin-transacciones" class="text-center text-muted mt-3" style="display: none;">
+                <p>No hay transacciones registradas</p>
               </div>
             </div>
-
-            <!-- Botón volver -->
-            <button id="btn-menu" class="btn btn-secondary w-100">Volver al Menú</button>
+            <!-- Columna Saldo y botón volver -->
+            <div class="col-12 col-md-4 mt-4 d-flex flex-column">
+              <!-- Saldo actual -->
+              <div class="card card-saldo mb-3">
+                <div class="card-body text-center">
+                  <h6 class="card-subtitle mb-2 text-muted">Saldo actual</h6>
+                  <h4 class="card-title mb-0" id="saldo-actual"></h4>
+                </div>
+              </div>
+              <button id="btn-menu" class="btn btn-secondary w-100">Volver al Menú</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz4YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script src="../js/navegacion.js"></script>
-  <script src="../js/transacciones.js"></script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz4YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="../js/navegacion.js"></script>
+    <script src="../js/transacciones.js"></script>
+  </body>
 </html>
