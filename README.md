@@ -29,12 +29,18 @@ Contiene:
     /img/ 1 fondo de pantalla
 Pantallas:
 Login:
+
 ![login](img/Presentacion/Login.PNG)
 Menu:
+
 ![principal](img/Presentacion/menu.PNG)
 Depositos:
+
 ![Depositos](img/Presentacion/deposito.PNG)
-Transferencias
+Transferencias:
+
 ![Transferencias](img/Presentacion/gestio_contactos.PNG)
 Historial:
+
 ![Historial](img/Presentacion/Transacciones.PNG)
+
